@@ -6,14 +6,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main<FXMLLoader> extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("imgViewer.fxml"));
+    public <Parent, Stage> void start(Stage primaryStage) throws Exception{
+//        Parent root = FXMLLoader.load(getClass().getResource("gusInfoGraphic.fxml"));
+//        primaryStage.setTitle("Hello World");
+//        primaryStage.setScene(new Scene(root, 800, 700));
+//        primaryStage.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gusInfoGraphic.fxml"));
+        Parent root = loader.load();
+        ModuleLayer.Controller controller = loader.getController();
+
+        controller.setHostServices(this.getHostServices());
+        controller.setStage(primaryStage);
+
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 800, 700));
         primaryStage.show();
+
+
+
     }
 
 
